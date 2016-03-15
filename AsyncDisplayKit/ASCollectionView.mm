@@ -1058,7 +1058,7 @@ static NSString * const kCellReuseIdentifier = @"_ASCollectionViewCell";
     _queuedNodeSizeInvalidationContext = [[_ASCollectionViewNodeSizeInvalidationContext alloc] init];
     
     __weak __typeof__(self) weakSelf = self;
-    dispatch_sync(dispatch_get_main_queue(), ^{
+    dispatch_async(dispatch_get_main_queue(), ^{
       __typeof__(self) strongSelf = weakSelf;
       if (strongSelf) {
         [strongSelf requeryNodeSizes];
