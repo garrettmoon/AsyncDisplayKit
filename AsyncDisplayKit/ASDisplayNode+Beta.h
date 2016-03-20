@@ -91,4 +91,9 @@ ASDISPLAYNODE_EXTERN_C_END
                          shouldMeasureAsync:(BOOL)shouldMeasureAsync
                       measurementCompletion:(void(^)())completion;
 
+/**
+ * @abstract Cancels all performing layout transitions. Can be called on any thread.
+ */
+- (void)cancelLayoutTransitionsInProgress;
+
 @end
