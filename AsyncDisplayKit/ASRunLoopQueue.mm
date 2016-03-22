@@ -36,7 +36,7 @@ static void runLoopSourceCallback(void *info) {
     _runLoop = runloop;
     _internalQueue = std::deque<id>();
     _queueConsumer = [handlerBlock copy];
-    _batchSize = 1;
+    _batchSize = 1000;
     void (^handlerBlock) (CFRunLoopObserverRef observer, CFRunLoopActivity activity) = ^(CFRunLoopObserverRef observer, CFRunLoopActivity activity) {
       [self processQueue];
     };

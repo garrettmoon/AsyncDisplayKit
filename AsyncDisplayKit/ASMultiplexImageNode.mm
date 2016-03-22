@@ -733,8 +733,8 @@ typedef void(^ASMultiplexImageLoadCompletionBlock)(UIImage *image, id imageIdent
 
   if (_cache) {
     if (_cacheSupportsNewProtocol) {
-      [_cache cachedImageWithURL:imageURL callbackQueue:dispatch_get_main_queue() completion:^(UIImage *imageFromCache) {
-        completionBlock(imageFromCache);
+      [_cache cachedImageWithURL:imageURL callbackQueue:dispatch_get_main_queue() completion:^(id <ASImageContainerProtocol> imageContainer) {
+        completionBlock([imageContainer asdk_image]);
       }];
     } else {
 #pragma clang diagnostic push
@@ -779,7 +779,7 @@ typedef void(^ASMultiplexImageLoadCompletionBlock)(UIImage *image, id imageIdent
       [self _setDownloadIdentifier:[_downloader downloadImageWithURL:imageURL
                                                        callbackQueue:dispatch_get_main_queue()
                                                     downloadProgress:downloadProgressBlock
-                                                          completion:^(UIImage *downloadedImage, NSError *error, id downloadIdentifier) {
+                                                          completion:^(id <ASImageContainerProtocol> imageContainer, NSError *error, id downloadIdentifier) {
                                                             // We dereference iVars directly, so we can't have weakSelf going nil on us.
                                                             __typeof__(self) strongSelf = weakSelf;
                                                             if (!strongSelf)
@@ -791,7 +791,7 @@ typedef void(^ASMultiplexImageLoadCompletionBlock)(UIImage *image, id imageIdent
                                                               return;
                                                             }
                                                             
-                                                            completionBlock(downloadedImage, error);
+                                                            completionBlock([imageContainer asdk_image], error);
                                                             
                                                             // Delegateify.
                                                             if (strongSelf->_delegateFlags.downloadFinish)

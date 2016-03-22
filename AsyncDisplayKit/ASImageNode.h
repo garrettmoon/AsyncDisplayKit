@@ -8,6 +8,8 @@
 
 #import <AsyncDisplayKit/ASControlNode.h>
 
+@class ASAnimatedImage;
+
 NS_ASSUME_NONNULL_BEGIN
 
 /**
@@ -34,6 +36,8 @@ typedef UIImage * _Nullable (^asimagenode_modification_block_t)(UIImage *image);
  * course.
  */
 @property (nullable, atomic, retain) UIImage *image;
+
+@property (nullable, atomic, strong) ASAnimatedImage *animatedImage;
 
 /**
  @abstract The placeholder color.
